@@ -1,0 +1,22 @@
+{
+  "frontend": [
+    { "name": "HTML5",       "icon": "html5" },
+    { "name": "CSS3",        "icon": "css3" },
+    { "name": "JavaScript",  "icon": "javascript" },
+    { "name": "Tailwind CSS","icon": "tailwind" },
+    { "name": "EJS",         "icon": "ejs" }
+  ],
+  "backend": [
+    { "name": "Node.js",     "icon": "nodejs" },
+    { "name": "Express.js",  "icon": "express" },
+    { "name": "Python",      "icon": "python" },
+    { "name": "REST APIs",   "icon": "api" }
+  ],
+  "tools": [
+    { "name": "Git",         "icon": "git" },
+    { "name": "GitHub",      "icon": "github" },
+    { "name": "VS Code",     "icon": "vscode" },
+    { "name": "PostgreSQL",  "icon": "postgresql" },
+    { "name": "Docker",      "icon": "docker" }
+  ]
+}

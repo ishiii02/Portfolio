@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "type": "work",
+    "role": "Full-Stack Developer",
+    "company": "Company Name",
+    "period": "2023 — Present",
+    "description": "Brief description of responsibilities and achievements."
+  },
+  {
+    "id": 2,
+    "type": "education",
+    "role": "Bachelor of Science in Computer Science",
+    "company": "University Name",
+    "period": "2019 — 2023",
+    "description": "Relevant coursework, thesis, or highlights."
+  }
+]
