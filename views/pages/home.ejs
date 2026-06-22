@@ -1,16 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <%- include('../partials/head') %>
+  <%- include('../partials/head', { title: 'Nash Francis — Full-Stack Developer' }) %>
 </head>
 <body class="site-body">
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <%- include('../partials/navbar') %>
+  <%- include('../partials/navbar', { currentPage: 'home' }) %>
+
   <main id="main-content" class="main-content">
-    <section class="section container">
-      <span class="text-mono">// home.ejs — implemented in Phase 5</span>
+
+    <!-- ── HERO ─────────────────────────────────────────────── -->
+    <section class="hero" aria-label="Introduction">
+      <!-- Atmospheric grid bg -->
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="scan-line" aria-hidden="true"></div>
+
+      <!-- Glow orbs -->
+      <div class="glow-orb glow-orb--cyan" style="width:600px;height:600px;top:-200px;left:-100px;" aria-hidden="true"></div>
+      <div class="glow-orb glow-orb--blue" style="width:400px;height:400px;bottom:-100px;right:-50px;" aria-hidden="true"></div>
+
+      <div class="hero__inner container">
+        <div class="hero__content">
+          <!-- Terminal label -->
+          <div class="hero__terminal animate-fade-in-up animate-delay-1">
+            <span class="text-mono">
+              <span style="color:var(--color-text-muted);">~/nash-francis</span>
+              <span style="color:var(--color-success);">$</span>
+              <span id="typed-text"> </span><span class="cursor-blink"></span>
+            </span>
+          </div>
+
+          <!-- Name -->
+          <h1 class="hero__name animate-fade-in-up animate-delay-2">
+            Nash<br>
+            <span class="text-gradient">Francis.</span>
+          </h1>
+
+          <!-- Role -->
+          <p class="hero__role animate-fade-in-up animate-delay-3">
+            Full-Stack Developer
+          </p>
+
+          <!-- Bio -->
+          <p class="hero__bio animate-fade-in-up animate-delay-4">
+            I build fast, scalable web applications — from database to deployment.
+            Clean code, thoughtful architecture, and user-first interfaces.
+          </p>
+
+          <!-- CTAs -->
+          <div class="hero__actions animate-fade-in-up animate-delay-5">
+            <a href="/projects" class="btn btn--primary btn--lg">
+              View Projects <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+            <a href="/files/nash-francis-cv.pdf" class="btn btn--ghost btn--lg" download>
+              <i class="fas fa-download" aria-hidden="true"></i> Download CV
+            </a>
+          </div>
+
+          <!-- Social strip -->
+          <div class="hero__social animate-fade-in-up animate-delay-5">
+            <a href="https://github.com/Nash-Francis" target="_blank" rel="noopener noreferrer" class="hero__social-link" aria-label="GitHub">
+              <i class="fab fa-github" aria-hidden="true"></i>
+            </a>
+            <a href="https://linkedin.com/in/nashfrancis" target="_blank" rel="noopener noreferrer" class="hero__social-link" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+            </a>
+            <span class="hero__social-divider" aria-hidden="true"></span>
+            <span class="text-mono" style="font-size:0.7rem;color:var(--color-text-muted);">Open to opportunities</span>
+          </div>
+        </div>
+
+        <!-- Hero visual -->
+        <div class="hero__visual animate-fade-in-up animate-delay-3" aria-hidden="true">
+          <div class="hero__code-card float">
+            <div class="hero__code-header">
+              <span class="hero__dot" style="background:#f87171;"></span>
+              <span class="hero__dot" style="background:#fbbf24;"></span>
+              <span class="hero__dot" style="background:#34d399;"></span>
+              <span class="hero__code-filename">portfolio.js</span>
+            </div>
+            <pre class="hero__code"><code><span class="code-keyword">const</span> <span class="code-var">nash</span> = {
+  <span class="code-key">role</span>:   <span class="code-str">'Full-Stack Dev'</span>,
+  <span class="code-key">stack</span>:  [<span class="code-str">'Node'</span>, <span class="code-str">'React'</span>,
+           <span class="code-str">'PostgreSQL'</span>],
+  <span class="code-key">focus</span>:  <span class="code-str">'Clean Architecture'</span>,
+  <span class="code-key">status</span>: <span class="code-str">'Available'</span> <span class="code-comment">// ✓</span>
+};</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="hero__scroll-hint animate-fade-in-up animate-delay-5" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+        <span class="text-mono" style="font-size:0.65rem;">scroll</span>
+      </div>
     </section>
+
+    <!-- ── FEATURED PROJECTS ──────────────────────────────────── -->
+    <section class="section featured" aria-labelledby="featured-heading">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-label">Selected Work</span>
+          <h2 class="heading-2" id="featured-heading">Projects I've Built</h2>
+          <p class="text-muted" style="max-width:520px;margin-top:0.75rem;">
+            A selection of full-stack projects — from concept to deployment.
+          </p>
+        </div>
+
+        <div class="featured__grid">
+          <% if (featured && featured.length > 0) { %>
+            <% featured.forEach((project, i) => { %>
+              <article class="card project-card" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+                <div class="project-card__meta">
+                  <div class="tag-list">
+                    <% project.tags.forEach(tag => { %>
+                      <span class="tag"><%= tag %></span>
+                    <% }) %>
+                  </div>
+                  <div class="project-card__links">
+                    <% if (project.githubUrl) { %>
+                      <a href="<%= project.githubUrl %>" target="_blank" rel="noopener noreferrer" class="project-card__icon-link" aria-label="View source on GitHub">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                      </a>
+                    <% } %>
+                    <% if (project.liveUrl) { %>
+                      <a href="<%= project.liveUrl %>" target="_blank" rel="noopener noreferrer" class="project-card__icon-link" aria-label="View live site">
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                      </a>
+                    <% } %>
+                  </div>
+                </div>
+                <h3 class="heading-3" style="margin-top:var(--space-4);">
+                  <a href="/projects/<%= project.id %>" class="project-card__title-link"><%= project.title %></a>
+                </h3>
+                <p class="text-muted" style="margin-top:var(--space-3);font-size:var(--text-sm);"><%= project.summary %></p>
+                <a href="/projects/<%= project.id %>" class="project-card__cta">
+                  View Case Study <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </article>
+            <% }) %>
+          <% } else { %>
+            <p class="text-muted" data-aos="fade-up">Projects coming soon.</p>
+          <% } %>
+        </div>
+
+        <div class="section-cta" data-aos="fade-up">
+          <a href="/projects" class="btn btn--outline">
+            View All Projects <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── QUICK SKILLS STRIP ─────────────────────────────────── -->
+    <section class="skills-strip section--sm" aria-label="Technologies">
+      <div class="container">
+        <p class="text-mono" style="text-align:center;margin-bottom:var(--space-8);color:var(--color-text-muted);" data-aos="fade-up">
+          // technologies I work with
+        </p>
+        <div class="skills-strip__list" data-aos="fade-up" data-aos-delay="100">
+          <span class="skills-strip__item">Node.js</span>
+          <span class="skills-strip__dot" aria-hidden="true">·</span>
+          <span class="skills-strip__item">Express</span>
+          <span class="skills-strip__dot" aria-hidden="true">·</span>
+          <span class="skills-strip__item">React</span>
+          <span class="skills-strip__dot" aria-hidden="true">·</span>
+          <span class="skills-strip__item">PostgreSQL</span>
+          <span class="skills-strip__dot" aria-hidden="true">·</span>
+          <span class="skills-strip__item">Python</span>
+          <span class="skills-strip__dot" aria-hidden="true">·</span>
+          <span class="skills-strip__item">Docker</span>
+          <span class="skills-strip__dot" aria-hidden="true">·</span>
+          <span class="skills-strip__item">Git</span>
+          <span class="skills-strip__dot" aria-hidden="true">·</span>
+          <span class="skills-strip__item">REST APIs</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA BANNER ─────────────────────────────────────────── -->
+    <section class="cta-banner section--sm" aria-labelledby="cta-heading">
+      <div class="container">
+        <div class="cta-banner__inner card" data-aos="fade-up">
+          <div class="glow-orb glow-orb--cyan" style="width:300px;height:300px;top:-100px;right:-50px;opacity:0.08;" aria-hidden="true"></div>
+          <span class="section-label">Let's work together</span>
+          <h2 class="heading-2" id="cta-heading">Have a project in mind?</h2>
+          <p class="text-muted" style="max-width:480px;margin-top:var(--space-3);">
+            I'm currently available for freelance work and full-time roles.
+            Let's build something great.
+          </p>
+          <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-8);">
+            <a href="/contact" class="btn btn--primary btn--lg">Get In Touch</a>
+            <a href="/about" class="btn btn--ghost btn--lg">Learn More About Me</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
+
   <%- include('../partials/footer') %>
   <%- include('../partials/scripts', { pageScript: 'hero.js' }) %>
 </body>

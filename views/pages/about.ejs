@@ -1,16 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <%- include('../partials/head') %>
+  <%- include('../partials/head', { title: 'About — Nash Francis' }) %>
 </head>
 <body class="site-body">
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <%- include('../partials/navbar') %>
+  <%- include('../partials/navbar', { currentPage: 'about' }) %>
+
   <main id="main-content" class="main-content">
-    <section class="section container">
-      <span class="text-mono">// about.ejs — implemented in Phase 5</span>
+
+    <!-- ── PAGE HEADER ───────────────────────────────────────── -->
+    <section class="page-header">
+      <div class="page-header__grid-bg" aria-hidden="true"></div>
+      <div class="container">
+        <span class="section-label" data-aos="fade-up">About Me</span>
+        <h1 class="heading-1" data-aos="fade-up" data-aos-delay="100">
+          The developer<br>behind the code.
+        </h1>
+      </div>
     </section>
+
+    <!-- ── BIO SECTION ───────────────────────────────────────── -->
+    <section class="section about-bio" aria-label="Biography">
+      <div class="container">
+        <div class="about-bio__grid">
+
+          <!-- Text -->
+          <div class="about-bio__text" data-aos="fade-right">
+            <span class="section-label">Background</span>
+            <h2 class="heading-2" style="margin-bottom:var(--space-6);">
+              I turn complex problems<br>into clean solutions.
+            </h2>
+            <p class="about-bio__para">
+              I'm Nash Francis, a full-stack developer with a passion for building
+              scalable, maintainable web applications. My journey into software began
+              with a curiosity about how things work under the hood — and that curiosity
+              never stopped.
+            </p>
+            <p class="about-bio__para">
+              I specialize in the Node.js ecosystem on the backend and modern JavaScript
+              on the frontend. I care deeply about code architecture, developer experience,
+              and writing software that's easy to understand and extend.
+            </p>
+            <p class="about-bio__para">
+              When I'm not building things, I'm studying systems design, contributing to
+              open-source projects, or experimenting with new tools and frameworks.
+            </p>
+            <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-8);">
+              <a href="/contact" class="btn btn--primary">Get In Touch</a>
+              <a href="/files/nash-francis-cv.pdf" class="btn btn--ghost" download>
+                <i class="fas fa-download" aria-hidden="true"></i> Download CV
+              </a>
+            </div>
+          </div>
+
+          <!-- Profile card -->
+          <div class="about-bio__card-wrap" data-aos="fade-left" data-aos-delay="150">
+            <div class="about-profile-card card">
+              <!-- Avatar placeholder -->
+              <div class="about-profile-card__avatar" aria-label="Nash Francis profile photo">
+                <span class="text-mono" style="font-size:var(--text-4xl);color:var(--color-accent);">NF</span>
+              </div>
+              <h2 class="heading-3" style="margin-top:var(--space-5);">Nash Francis</h2>
+              <p class="text-mono" style="font-size:var(--text-sm);color:var(--color-accent);margin-top:var(--space-1);">Full-Stack Developer</p>
+
+              <hr class="divider" style="margin-block:var(--space-5);" />
+
+              <ul class="about-profile-card__details">
+                <li>
+                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                  <span>Philippines</span>
+                </li>
+                <li>
+                  <i class="fas fa-circle" style="color:var(--color-success);font-size:0.5rem;" aria-hidden="true"></i>
+                  <span>Available for hire</span>
+                </li>
+                <li>
+                  <i class="fab fa-github" aria-hidden="true"></i>
+                  <a href="https://github.com/Nash-Francis" target="_blank" rel="noopener noreferrer" class="footer__link">github.com/Nash-Francis</a>
+                </li>
+                <li>
+                  <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                  <a href="https://linkedin.com/in/nashfrancis" target="_blank" rel="noopener noreferrer" class="footer__link">linkedin.com/in/nashfrancis</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VALUES ────────────────────────────────────────────── -->
+    <section class="section--sm about-values" aria-labelledby="values-heading">
+      <div class="container">
+        <span class="section-label" data-aos="fade-up">What I believe in</span>
+        <h2 class="heading-2" id="values-heading" data-aos="fade-up" data-aos-delay="100" style="margin-bottom:var(--space-10);">
+          Principles I code by.
+        </h2>
+        <div class="grid-3">
+          <% const values = [
+            { icon: 'fa-layer-group', title: 'Clean Architecture', body: 'Code that reads like documentation. Separation of concerns, single responsibility, and modular design.' },
+            { icon: 'fa-bolt', title: 'Performance First', body: 'Fast pages aren\'t a bonus — they\'re a baseline. I optimise at every layer, from SQL queries to asset delivery.' },
+            { icon: 'fa-users', title: 'User-Centred', body: 'The best technical solution is the one that solves the right problem. I stay close to the product goals.' },
+          ] %>
+          <% values.forEach((v, i) => { %>
+            <div class="card" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+              <div class="about-values__icon">
+                <i class="fas <%= v.icon %>" aria-hidden="true"></i>
+              </div>
+              <h3 class="heading-3" style="margin-top:var(--space-4)"><%= v.title %></h3>
+              <p class="text-muted" style="margin-top:var(--space-3);font-size:var(--text-sm)"><%= v.body %></p>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+
   </main>
+
   <%- include('../partials/footer') %>
   <%- include('../partials/scripts') %>
 </body>

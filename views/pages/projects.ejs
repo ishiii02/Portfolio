@@ -1,16 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <%- include('../partials/head') %>
+  <%- include('../partials/head', { title: 'Skills — Nash Francis' }) %>
 </head>
 <body class="site-body">
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <%- include('../partials/navbar') %>
+  <%- include('../partials/navbar', { currentPage: 'skills' }) %>
+
   <main id="main-content" class="main-content">
-    <section class="section container">
-      <span class="text-mono">// projects.ejs — implemented in Phase 5</span>
+
+    <!-- ── PAGE HEADER ───────────────────────────────────────── -->
+    <section class="page-header">
+      <div class="page-header__grid-bg" aria-hidden="true"></div>
+      <div class="container">
+        <span class="section-label" data-aos="fade-up">Technical Skills</span>
+        <h1 class="heading-1" data-aos="fade-up" data-aos-delay="100">
+          Tools of the trade.
+        </h1>
+        <p class="text-muted" style="max-width:480px;margin:var(--space-4) auto 0;" data-aos="fade-up" data-aos-delay="150">
+          Technologies I've built production systems with — grouped by where they live in the stack.
+        </p>
+      </div>
     </section>
+
+    <!-- ── SKILLS GRID ───────────────────────────────────────── -->
+    <section class="section skills-section" aria-label="Skills by category">
+      <div class="container">
+
+        <!-- Frontend -->
+        <div class="skills-category" data-aos="fade-up">
+          <div class="skills-category__header">
+            <span class="section-label">Frontend</span>
+            <h2 class="heading-2">What users see.</h2>
+          </div>
+          <div class="skills-grid">
+            <% skills.frontend.forEach((skill, i) => { %>
+              <div class="skill-card card" data-aos="fade-up" data-aos-delay="<%= i * 60 %>">
+                <div class="skill-card__icon-wrap">
+                  <i class="skill-card__icon devicon-<%= skill.icon %>-plain colored" aria-hidden="true"></i>
+                </div>
+                <span class="skill-card__name"><%= skill.name %></span>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- Backend -->
+        <div class="skills-category" data-aos="fade-up">
+          <div class="skills-category__header">
+            <span class="section-label">Backend</span>
+            <h2 class="heading-2">How it works.</h2>
+          </div>
+          <div class="skills-grid">
+            <% skills.backend.forEach((skill, i) => { %>
+              <div class="skill-card card" data-aos="fade-up" data-aos-delay="<%= i * 60 %>">
+                <div class="skill-card__icon-wrap">
+                  <i class="skill-card__icon devicon-<%= skill.icon %>-plain colored" aria-hidden="true"></i>
+                </div>
+                <span class="skill-card__name"><%= skill.name %></span>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- Tools -->
+        <div class="skills-category" data-aos="fade-up">
+          <div class="skills-category__header">
+            <span class="section-label">Tools & Platforms</span>
+            <h2 class="heading-2">How I ship.</h2>
+          </div>
+          <div class="skills-grid">
+            <% skills.tools.forEach((skill, i) => { %>
+              <div class="skill-card card" data-aos="fade-up" data-aos-delay="<%= i * 60 %>">
+                <div class="skill-card__icon-wrap">
+                  <i class="skill-card__icon devicon-<%= skill.icon %>-plain colored" aria-hidden="true"></i>
+                </div>
+                <span class="skill-card__name"><%= skill.name %></span>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── LEARNING NOW ───────────────────────────────────────── -->
+    <section class="section--sm learning" aria-labelledby="learning-heading">
+      <div class="container">
+        <div class="card learning__card" data-aos="fade-up">
+          <span class="section-label">Currently Exploring</span>
+          <h2 class="heading-3" id="learning-heading" style="margin-top:var(--space-2);">
+            Always learning.
+          </h2>
+          <p class="text-muted" style="margin-top:var(--space-3);font-size:var(--text-sm);">
+            Right now I'm digging into: <span class="tag" style="display:inline-flex;">System Design</span>
+            <span class="tag" style="display:inline-flex;margin-left:0.5rem;">TypeScript</span>
+            <span class="tag" style="display:inline-flex;margin-left:0.5rem;">AWS</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
   </main>
+
   <%- include('../partials/footer') %>
   <%- include('../partials/scripts') %>
 </body>

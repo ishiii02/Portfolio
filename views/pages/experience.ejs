@@ -1,16 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <%- include('../partials/head') %>
+  <%- include('../partials/head', { title: 'Experience &#8212; Nash Francis' }) %>
 </head>
 <body class="site-body">
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <%- include('../partials/navbar') %>
+
+  <%- include('../partials/navbar', { currentPage: 'experience' }) %>
+
   <main id="main-content" class="main-content">
-    <section class="section container">
-      <span class="text-mono">// experience.ejs — implemented in Phase 5</span>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+      <div class="page-header__grid-bg" aria-hidden="true"></div>
+
+      <div class="container">
+        <span class="section-label" data-aos="fade-up">
+          Professional Journey
+        </span>
+
+        <h1 class="heading-1" data-aos="fade-up" data-aos-delay="100">
+          My experience<br>in code and learning.
+        </h1>
+      </div>
     </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section
+      class="section"
+      aria-label="Professional and educational experience"
+    >
+      <div class="container">
+
+        <% if (experience && experience.length > 0) { %>
+
+          <% experience.forEach((exp, i) => { %>
+            <article
+              class="card"
+              aria-label="<%= exp.role %> at <%= exp.company %>"
+              data-aos="fade-up"
+              data-aos-delay="<%= i * 100 %>"
+            >
+
+              <span class="tag">
+                <%= exp.type === 'work' ? 'Work' : 'Education' %>
+              </span>
+
+              <h3 class="heading-3"><%= exp.role %></h3>
+
+              <p class="text-muted">
+                <%= exp.company %>
+              </p>
+
+              <p class="text-muted">
+                <%= exp.period %>
+              </p>
+
+              <p>
+                <%= exp.description %>
+              </p>
+
+            </article>
+          <% }) %>
+
+        <% } else { %>
+
+          <p class="text-muted" data-aos="fade-up">
+            No experience records found.
+          </p>
+
+        <% } %>
+
+      </div>
+    </section>
+
   </main>
+
   <%- include('../partials/footer') %>
   <%- include('../partials/scripts') %>
 </body>

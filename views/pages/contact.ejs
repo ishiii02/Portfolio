@@ -1,17 +1,135 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <%- include('../partials/head') %>
+  <%- include('../partials/head', { title: 'Contact &#8212; Nash Francis' }) %>
 </head>
 <body class="site-body">
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <%- include('../partials/navbar') %>
+
+<%- include('../partials/navbar', { currentPage: 'contact' }) %>
+
   <main id="main-content" class="main-content">
-    <section class="section container">
-      <span class="text-mono">// contact.ejs — implemented in Phase 5</span>
-    </section>
+
+```
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header__grid-bg" aria-hidden="true"></div>
+
+  <div class="container">
+    <span class="section-label" data-aos="fade-up">
+      Get In Touch
+    </span>
+
+    <h1 class="heading-1" data-aos="fade-up" data-aos-delay="100">
+      Let’s build<br>something together.
+    </h1>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="section contact-form" aria-label="Contact form">
+  <div class="container">
+
+    <% if (status === 'sent') { %>
+      <div
+        class="alert alert--success"
+        role="alert"
+        data-aos="fade-up"
+      >
+        <i class="fas fa-check-circle" aria-hidden="true"></i>
+        <span>
+          Thanks for your message! I’ll get back to you soon.
+        </span>
+      </div>
+    <% } %>
+
+    <% if (errors && errors.length > 0) { %>
+      <div
+        class="alert alert--error"
+        role="alert"
+        data-aos="fade-up"
+      >
+        <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+
+        <ul>
+          <% errors.forEach(err => { %>
+            <li><%= err %></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+
+    <form
+      action="/contact"
+      method="POST"
+      class="form"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <div class="form-group">
+        <label for="name" class="form-label">
+          Name
+        </label>
+
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-input"
+          autocomplete="name"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-input"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="message" class="form-label">
+          Message
+        </label>
+
+        <textarea
+          id="message"
+          name="message"
+          class="form-textarea"
+          rows="5"
+          required
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn--primary btn--lg"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        Send Message
+        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+      </button>
+    </form>
+
+  </div>
+</section>
+```
+
   </main>
-  <%- include('../partials/footer') %>
-  <%- include('../partials/scripts') %>
+
+<%- include('../partials/footer') %>
+<%- include('../partials/scripts') %>
+
 </body>
 </html>
