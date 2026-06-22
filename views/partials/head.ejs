@@ -2,33 +2,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<!-- SEO -->
-<title><%= typeof title !== 'undefined' ? title : 'Nash Francis — Full-Stack Developer' %></title>
-<meta name="description" content="<%= typeof meta !== 'undefined' && meta.description ? meta.description : 'Nash Francis — Full-Stack Developer building scalable web applications with modern technologies.' %>" />
+<!-- SEO: Core Meta Tags -->
+<title><%= typeof title !== 'undefined' ? title : 'Nash Francis — Full-Stack Developer | Portfolio' %></title>
+<meta name="description" content="<%= typeof meta !== 'undefined' && meta.description ? meta.description : 'Full-Stack Developer portfolio. I build fast, scalable web applications with Node.js, React, PostgreSQL, and modern technologies. Available for freelance work.' %>" />
+<meta name="keywords" content="full-stack developer, Node.js, React, PostgreSQL, web development, portfolio, freelance" />
 <meta name="author" content="Nash Francis" />
-<meta name="robots" content="index, follow" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="theme-color" content="#000000" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<!-- Open Graph -->
-<meta property="og:title"       content="<%= typeof title !== 'undefined' ? title : 'Nash Francis' %>" />
-<meta property="og:description" content="Full-Stack Developer portfolio — projects, skills, and experience." />
+<!-- SEO: Open Graph (Social Media Sharing) -->
+<meta property="og:title"       content="<%= typeof title !== 'undefined' ? title : 'Nash Francis — Full-Stack Developer' %>" />
+<meta property="og:description" content="Full-Stack Developer portfolio — projects, skills, and experience. Building scalable web applications." />
 <meta property="og:type"        content="website" />
 <meta property="og:url"         content="https://nashfrancis.dev" />
-<meta property="og:image"       content="/images/og-preview.png" />
+<meta property="og:image"       content="https://nashfrancis.dev/images/og-preview.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale"      content="en_US" />
 
-<!-- Favicon -->
+<!-- SEO: Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Nash Francis — Full-Stack Developer" />
+<meta name="twitter:description" content="Portfolio of a full-stack developer. Check out my projects and experience." />
+<meta name="twitter:image" content="https://nashfrancis.dev/images/og-preview.png" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://nashfrancis.dev" />
+
+<!-- Favicon & App Icons -->
 <link rel="icon" type="image/svg+xml" href="/images/icons/favicon.svg" />
+<link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" />
+<link rel="manifest" href="/manifest.json" />
 
-<!-- Fonts: Space Grotesk (display) + JetBrains Mono (code/accent) -->
+<!-- Font Preload (Performance) -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+<!-- Fonts: Space Grotesk (display) + JetBrains Mono (code/accent) -->
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <!-- Font Awesome Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- AOS — Animate On Scroll -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<!-- Main Stylesheet -->
+<!-- Main Stylesheets -->
 <link rel="stylesheet" href="/css/style.css" />
 <link rel="stylesheet" href="/css/animations.css" />

@@ -1,10 +1,10 @@
-<!-- AOS Init -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<!-- AOS: Animate On Scroll (async + defer for non-blocking load) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" async defer></script>
 
-<!-- Main JS -->
-<script src="/js/main.js"></script>
+<!-- Main Application Script -->
+<script src="/js/main.js" defer></script>
 
-<!-- Page-specific scripts -->
+<!-- Page-specific scripts (loaded after main) -->
 <% if (typeof pageScript !== 'undefined' && pageScript) { %>
-  <script src="/js/<%= pageScript %>"></script>
+  <script src="/js/<%= pageScript %>" defer></script>
 <% } %>
