@@ -28,3 +28,5 @@ build/
 # Upload/cache
 .cache/
 public/uploads/
+
+.vercel
