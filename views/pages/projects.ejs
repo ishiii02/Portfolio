@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <%- include('../partials/head', { title: 'Skills — Nash Francis' }) %>
+  <%- include('../partials/head', { title: 'Projects — Nash Francis' }) %>
 </head>
 <body class="site-body">
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <%- include('../partials/navbar', { currentPage: 'skills' }) %>
+  <%- include('../partials/navbar', { currentPage: 'projects' }) %>
 
   <main id="main-content" class="main-content">
 
@@ -13,95 +13,63 @@
     <section class="page-header">
       <div class="page-header__grid-bg" aria-hidden="true"></div>
       <div class="container">
-        <span class="section-label" data-aos="fade-up">Technical Skills</span>
+        <span class="section-label" data-aos="fade-up">Selected Work</span>
         <h1 class="heading-1" data-aos="fade-up" data-aos-delay="100">
-          Tools of the trade.
+          Projects I've built.
         </h1>
         <p class="text-muted" style="max-width:480px;margin:var(--space-4) auto 0;" data-aos="fade-up" data-aos-delay="150">
-          Technologies I've built production systems with — grouped by where they live in the stack.
+          A selection of full-stack projects — from concept to deployment.
         </p>
       </div>
     </section>
 
-    <!-- ── SKILLS GRID ───────────────────────────────────────── -->
-    <section class="section skills-section" aria-label="Skills by category">
+    <!-- ── PROJECTS GRID ───────────────────────────────────────── -->
+    <section class="section projects-section" aria-label="Project portfolio">
       <div class="container">
-
-        <!-- Frontend -->
-        <div class="skills-category" data-aos="fade-up">
-          <div class="skills-category__header">
-            <span class="section-label">Frontend</span>
-            <h2 class="heading-2">What users see.</h2>
-          </div>
-          <div class="skills-grid">
-            <% skills.frontend.forEach((skill, i) => { %>
-              <div class="skill-card card" data-aos="fade-up" data-aos-delay="<%= i * 60 %>">
-                <div class="skill-card__icon-wrap">
-                  <i class="skill-card__icon devicon-<%= skill.icon %>-plain colored" aria-hidden="true"></i>
+        <% if (projects && projects.length > 0) { %>
+          <div class="projects-grid">
+            <% projects.forEach((project, i) => { %>
+              <article class="project-card card" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+                <div class="project-card__header">
+                  <div class="project-card__tags">
+                    <% project.tags.forEach(tag => { %>
+                      <span class="tag"><%= tag %></span>
+                    <% }) %>
+                  </div>
+                  <div class="project-card__links">
+                    <% if (project.githubUrl) { %>
+                      <a href="<%= project.githubUrl %>" class="project-card__link" title="View source on GitHub">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                      </a>
+                    <% } %>
+                    <% if (project.liveUrl) { %>
+                      <a href="<%= project.liveUrl %>" class="project-card__link" title="View live site">
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                      </a>
+                    <% } %>
+                  </div>
                 </div>
-                <span class="skill-card__name"><%= skill.name %></span>
-              </div>
+                
+                <h3 class="heading-3">
+                  <a href="/projects/<%= project.id %>" class="project-card__title">
+                    <%= project.title %>
+                  </a>
+                </h3>
+                
+                <p class="text-muted"><%= project.summary %></p>
+                
+                <a href="/projects/<%= project.id %>" class="btn btn--ghost btn--sm">
+                  View Case Study
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </article>
             <% }) %>
           </div>
-        </div>
-
-        <hr class="divider" />
-
-        <!-- Backend -->
-        <div class="skills-category" data-aos="fade-up">
-          <div class="skills-category__header">
-            <span class="section-label">Backend</span>
-            <h2 class="heading-2">How it works.</h2>
+        <% } else { %>
+          <div class="empty-state">
+            <p class="text-muted">No projects yet. Check back soon!</p>
           </div>
-          <div class="skills-grid">
-            <% skills.backend.forEach((skill, i) => { %>
-              <div class="skill-card card" data-aos="fade-up" data-aos-delay="<%= i * 60 %>">
-                <div class="skill-card__icon-wrap">
-                  <i class="skill-card__icon devicon-<%= skill.icon %>-plain colored" aria-hidden="true"></i>
-                </div>
-                <span class="skill-card__name"><%= skill.name %></span>
-              </div>
-            <% }) %>
-          </div>
-        </div>
-
-        <hr class="divider" />
-
-        <!-- Tools -->
-        <div class="skills-category" data-aos="fade-up">
-          <div class="skills-category__header">
-            <span class="section-label">Tools & Platforms</span>
-            <h2 class="heading-2">How I ship.</h2>
-          </div>
-          <div class="skills-grid">
-            <% skills.tools.forEach((skill, i) => { %>
-              <div class="skill-card card" data-aos="fade-up" data-aos-delay="<%= i * 60 %>">
-                <div class="skill-card__icon-wrap">
-                  <i class="skill-card__icon devicon-<%= skill.icon %>-plain colored" aria-hidden="true"></i>
-                </div>
-                <span class="skill-card__name"><%= skill.name %></span>
-              </div>
-            <% }) %>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ── LEARNING NOW ───────────────────────────────────────── -->
-    <section class="section--sm learning" aria-labelledby="learning-heading">
-      <div class="container">
-        <div class="card learning__card" data-aos="fade-up">
-          <span class="section-label">Currently Exploring</span>
-          <h2 class="heading-3" id="learning-heading" style="margin-top:var(--space-2);">
-            Always learning.
-          </h2>
-          <p class="text-muted" style="margin-top:var(--space-3);font-size:var(--text-sm);">
-            Right now I'm digging into: <span class="tag" style="display:inline-flex;">System Design</span>
-            <span class="tag" style="display:inline-flex;margin-left:0.5rem;">TypeScript</span>
-            <span class="tag" style="display:inline-flex;margin-left:0.5rem;">AWS</span>
-          </p>
-        </div>
+        <% } %>
       </div>
     </section>
 
