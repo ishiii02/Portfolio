@@ -1,0 +1,49 @@
+<footer class="footer">
+  <div class="footer__inner">
+
+    <!-- Brand -->
+    <div class="footer__brand">
+      <a href="/" class="navbar__logo" aria-label="Home">
+        <span class="navbar__logo-bracket">&lt;</span>
+        <span class="navbar__logo-name">NF</span>
+        <span class="navbar__logo-bracket">/&gt;</span>
+      </a>
+      <p class="footer__tagline">Building things for the web.</p>
+    </div>
+
+    <!-- Nav Links -->
+    <nav class="footer__nav" aria-label="Footer navigation">
+      <ul role="list">
+        <li><a href="/"           class="footer__link">Home</a></li>
+        <li><a href="/about"      class="footer__link">About</a></li>
+        <li><a href="/projects"   class="footer__link">Projects</a></li>
+        <li><a href="/experience" class="footer__link">Experience</a></li>
+        <li><a href="/contact"    class="footer__link">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Social Links -->
+    <div class="footer__social">
+      <a href="https://github.com/Nash-Francis" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      <a href="https://linkedin.com/in/nashfrancis" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+      </a>
+      <a href="mailto:nashfrancis@example.com" class="footer__social-link" aria-label="Email">
+        <i class="fas fa-envelope" aria-hidden="true"></i>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer__bottom">
+    <p class="footer__copy">
+      &copy; <%= new Date().getFullYear() %> Nash Francis. Built with Node.js + Express.
+    </p>
+    <a href="/files/nash-francis-cv.pdf" class="footer__cv-link" download aria-label="Download CV">
+      <i class="fas fa-download" aria-hidden="true"></i> Download CV
+    </a>
+  </div>
+</footer>

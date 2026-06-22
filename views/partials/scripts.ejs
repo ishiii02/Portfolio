@@ -1,0 +1,10 @@
+<!-- AOS Init -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<!-- Main JS -->
+<script src="/js/main.js"></script>
+
+<!-- Page-specific scripts -->
+<% if (typeof pageScript !== 'undefined' && pageScript) { %>
+  <script src="/js/<%= pageScript %>"></script>
+<% } %>

@@ -1,0 +1,45 @@
+<header class="navbar" id="navbar">
+  <nav class="navbar__inner" aria-label="Main navigation">
+
+    <!-- Logo / Wordmark -->
+    <a href="/" class="navbar__logo" aria-label="Nash Francis — Home">
+      <span class="navbar__logo-bracket">&lt;</span>
+      <span class="navbar__logo-name">NF</span>
+      <span class="navbar__logo-bracket">/&gt;</span>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <ul class="navbar__links" role="list">
+      <li><a href="/"           class="navbar__link <%= currentPage === 'home'       ? 'navbar__link--active' : '' %>">Home</a></li>
+      <li><a href="/about"      class="navbar__link <%= currentPage === 'about'      ? 'navbar__link--active' : '' %>">About</a></li>
+      <li><a href="/skills"     class="navbar__link <%= currentPage === 'skills'     ? 'navbar__link--active' : '' %>">Skills</a></li>
+      <li><a href="/projects"   class="navbar__link <%= currentPage === 'projects'   ? 'navbar__link--active' : '' %>">Projects</a></li>
+      <li><a href="/experience" class="navbar__link <%= currentPage === 'experience' ? 'navbar__link--active' : '' %>">Experience</a></li>
+    </ul>
+
+    <!-- CTA + Hamburger -->
+    <div class="navbar__actions">
+      <a href="/contact" class="btn btn--outline btn--sm" aria-label="Contact Nash Francis">
+        Contact
+      </a>
+      <button class="navbar__hamburger" id="hamburger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle navigation">
+        <span class="navbar__bar"></span>
+        <span class="navbar__bar"></span>
+        <span class="navbar__bar"></span>
+      </button>
+    </div>
+
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-label="Mobile navigation">
+    <ul class="mobile-menu__links" role="list">
+      <li><a href="/"           class="mobile-menu__link" data-close-menu>Home</a></li>
+      <li><a href="/about"      class="mobile-menu__link" data-close-menu>About</a></li>
+      <li><a href="/skills"     class="mobile-menu__link" data-close-menu>Skills</a></li>
+      <li><a href="/projects"   class="mobile-menu__link" data-close-menu>Projects</a></li>
+      <li><a href="/experience" class="mobile-menu__link" data-close-menu>Experience</a></li>
+      <li><a href="/contact"    class="mobile-menu__link mobile-menu__link--cta" data-close-menu>Contact</a></li>
+    </ul>
+  </div>
+</header>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../../partials/head', { title: '500 — Server Error' }) %>
+</head>
+<body class="site-body">
+  <%- include('../../partials/navbar', { currentPage: '' }) %>
+  <main class="main-content flex-center" style="min-height:90vh; flex-direction:column; gap:2rem; text-align:center; padding:2rem;">
+    <span class="text-mono" style="font-size:1rem;">error_500.js</span>
+    <h1 class="heading-display text-gradient">500</h1>
+    <p class="text-muted" style="max-width:400px;">Something went wrong on the server. It's not you — it's me. Try again shortly.</p>
+    <a href="/" class="btn btn--primary btn--lg">← Back to Home</a>
+  </main>
+  <%- include('../../partials/footer') %>
+  <%- include('../../partials/scripts') %>
+</body>
+</html>
