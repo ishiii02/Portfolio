@@ -33,6 +33,8 @@
             <span class="section-label">Frontend</span>
             <h2 class="heading-2">What users see.</h2>
           </div>
+
+          <% if (skills.frontend && skills.frontend.length > 0) { %>
           <div class="skills-grid">
             <% skills.frontend.forEach((skill, i) => { %>
               <div class="skill-card card" data-aos="fade-up" data-aos-delay="<%= i * 60 %>">
@@ -43,6 +45,9 @@
               </div>
             <% }) %>
           </div>
+          <% } else { %>
+            <p class="text-muted">Frontend skills coming soon.</p>
+          <% } %>
         </div>
 
         <hr class="divider" />
@@ -53,6 +58,7 @@
             <span class="section-label">Backend</span>
             <h2 class="heading-2">How it works.</h2>
           </div>
+          <% if (skills.backend && skills.backend.length > 0) { %>
           <div class="skills-grid">
             <% skills.backend.forEach((skill, i) => { %>
               <div class="skill-card card" data-aos="fade-up" data-aos-delay="<%= i * 60 %>">
@@ -63,6 +69,9 @@
               </div>
             <% }) %>
           </div>
+          <% } else { %>
+            <p class="text-muted">Backend skills coming soon.</p>
+          <% } %>
         </div>
 
         <hr class="divider" />
@@ -73,6 +82,7 @@
             <span class="section-label">Tools & Platforms</span>
             <h2 class="heading-2">How I ship.</h2>
           </div>
+          <% if (skills.tools && skills.tools.length > 0) { %>
           <div class="skills-grid">
             <% skills.tools.forEach((skill, i) => { %>
               <div class="skill-card card" data-aos="fade-up" data-aos-delay="<%= i * 60 %>">
@@ -83,6 +93,9 @@
               </div>
             <% }) %>
           </div>
+          <% } else { %>
+            <p class="text-muted">Tools and platforms coming soon.</p>
+          <% } %>
         </div>
 
       </div>
