@@ -715,6 +715,7 @@ input, textarea, select {
   padding-block: clamp(var(--space-16), 10vw, var(--space-24));
   text-align: center;
   position: relative;
+  z-index: 1;
 }
 
 .page-header__grid-bg {
@@ -726,6 +727,7 @@ input, textarea, select {
   background-size: 40px 40px;
   pointer-events: none;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  z-index: -1;
 }
 
 /* ── 15. FORM ELEMENTS ──────────────────────────────────────── */
