@@ -1,16 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <%- include('../partials/head') %>
+  <%- include('../partials/head', { title: project.title + ' \u2014 Nash Francis' }) %>
 </head>
 <body class="site-body">
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <%- include('../partials/navbar') %>
+  <%- include('../partials/navbar', { currentPage: 'projects' }) %>
+
   <main id="main-content" class="main-content">
-    <section class="section container">
-      <span class="text-mono">// project-detail.ejs — implemented in Phase 5</span>
+
+    <!-- ── PAGE HEADER ───────────────────────────────────────── -->
+    <section class="page-header">
+      <div class="page-header__grid-bg" aria-hidden="true"></div>
+      <div class="container">
+        <a href="/projects" class="section-label" data-aos="fade-up" style="cursor:pointer;">
+          <i class="fas fa-arrow-left" aria-hidden="true" style="font-size:0.65rem;"></i>
+          Back to Projects
+        </a>
+        <h1 class="heading-1" data-aos="fade-up" data-aos-delay="100">
+          <%= project.title %>
+        </h1>
+        <p class="text-muted" style="max-width:560px;margin:var(--space-4) auto 0;" data-aos="fade-up" data-aos-delay="150">
+          <%= project.summary %>
+        </p>
+      </div>
     </section>
+
+    <!-- ── PROJECT DETAIL ─────────────────────────────────────── -->
+    <section class="section" aria-label="Project details">
+      <div class="container">
+
+        <!-- Project Image -->
+        <% if (project.image) { %>
+          <div class="project-detail__image-wrap" data-aos="fade-up">
+            <img
+              src="<%= project.image %>"
+              alt="<%= project.title %> screenshot"
+              class="project-detail__image"
+              loading="lazy"
+            />
+          </div>
+        <% } %>
+
+        <!-- Detail Card -->
+        <article class="card project-detail__card" data-aos="fade-up" data-aos-delay="100">
+
+          <!-- Tags -->
+          <div class="tag-list" style="margin-bottom:var(--space-8);">
+            <% project.tags.forEach(tag => { %>
+              <span class="tag"><%= tag %></span>
+            <% }) %>
+          </div>
+
+          <!-- Description -->
+          <div class="project-detail__body">
+            <% const paragraphs = (project.description || '').split('\n').filter(p => p.trim()); %>
+            <% paragraphs.forEach(para => { %>
+              <p style="margin-bottom:var(--space-4);line-height:1.8;color:var(--color-text-secondary);">
+                <%= para %>
+              </p>
+            <% }) %>
+          </div>
+
+          <!-- Divider -->
+          <hr class="divider" />
+
+          <!-- Action Links -->
+          <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;">
+            <% if (project.liveUrl) { %>
+              <a href="<%= project.liveUrl %>" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                View Live Site
+              </a>
+            <% } %>
+            <% if (project.githubUrl) { %>
+              <a href="<%= project.githubUrl %>" target="_blank" rel="noopener noreferrer" class="btn btn--outline">
+                <i class="fab fa-github" aria-hidden="true"></i>
+                View Source Code
+              </a>
+            <% } %>
+          </div>
+
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── NAVIGATION STRIP ───────────────────────────────────── -->
+    <section class="section--sm" aria-label="Project navigation">
+      <div class="container">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--space-4);">
+          <a href="/projects" class="btn btn--ghost">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            All Projects
+          </a>
+          <a href="/contact" class="btn btn--primary">
+            Interested? Let's Talk
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
+
   <%- include('../partials/footer') %>
   <%- include('../partials/scripts') %>
 </body>

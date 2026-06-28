@@ -1,5 +1,6 @@
 'use strict';
 
+
 const { validationResult } = require('express-validator');
 const { sendContactEmail } = require('../services/mail.service');
 

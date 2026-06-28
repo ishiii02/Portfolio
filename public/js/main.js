@@ -1,84 +1,130 @@
 'use strict';
 
-/* ──────────────────────────────────────────────────────────────
-   MAIN.JS — Nash Francis Portfolio
-   Global JS: navbar scroll, hamburger, AOS init, active links
-────────────────────────────────────────────────────────────── */
+/* ================================================================
+   MAIN.JS — Global client-side functionality
+   Loaded on every page via partials/scripts.ejs
+   ================================================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
+(function () {
+  'use strict';
 
-  // ── AOS Init ──────────────────────────────────────────────
-  if (typeof AOS !== 'undefined') {
-    AOS.init({
-      duration: 600,
-      easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-      once: true,
-      offset: 60,
-    });
-  }
-
-  // ── Navbar scroll effect ───────────────────────────────────
-  const navbar = document.getElementById('navbar');
-  if (navbar) {
-    const onScroll = () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 20);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
-
-  // ── Hamburger / Mobile Menu ────────────────────────────────
-  const hamburger  = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  if (hamburger && mobileMenu) {
-    const toggleMenu = (open) => {
-      hamburger.classList.toggle('open', open);
-      mobileMenu.classList.toggle('open', open);
-      hamburger.setAttribute('aria-expanded', String(open));
-      mobileMenu.setAttribute('aria-hidden',  String(!open));
-      document.body.style.overflow = open ? 'hidden' : '';
-    };
-
-    hamburger.addEventListener('click', () => {
-      const isOpen = hamburger.classList.contains('open');
-      toggleMenu(!isOpen);
-    });
-
-    // Close on link click
-    mobileMenu.querySelectorAll('[data-close-menu]').forEach(link => {
-      link.addEventListener('click', () => toggleMenu(false));
-    });
-
-    // Close on Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') toggleMenu(false);
-    });
-
-    // Close on backdrop click
-    mobileMenu.addEventListener('click', (e) => {
-      if (e.target === mobileMenu) toggleMenu(false);
-    });
-  }
-
-  // ── Active nav link (client-side fallback) ─────────────────
-  const currentPath = window.location.pathname;
-  document.querySelectorAll('.navbar__link').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === currentPath || (href !== '/' && currentPath.startsWith(href))) {
-      link.classList.add('navbar__link--active');
+  /* ── 1. AOS — Animate On Scroll Init ──────────────────────── */
+  function initAOS() {
+    if (typeof AOS !== 'undefined') {
+      AOS.init({
+        once: true,
+        duration: 600,
+        easing: 'ease-out-cubic',
+        offset: 80,
+      });
     }
-  });
+  }
 
-  // ── Smooth scroll for anchor links ────────────────────────
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  /* ── 2. Navbar — Scroll behaviour ─────────────────────────── */
+  function initNavbar() {
+    var navbar = document.getElementById('navbar');
+    if (!navbar) return;
+
+    var SCROLL_THRESHOLD = 40;
+
+    function onScroll() {
+      if (window.scrollY > SCROLL_THRESHOLD) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+
+    // Run once on load in case the page is already scrolled
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /* ── 3. Mobile Menu — Hamburger toggle ────────────────────── */
+  function initMobileMenu() {
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobile-menu');
+    if (!hamburger || !mobileMenu) return;
+
+    function openMenu() {
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function toggleMenu() {
+      var isOpen = mobileMenu.classList.contains('open');
+      isOpen ? closeMenu() : openMenu();
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+
+    // Close on link click (data-close-menu attribute)
+    var closeTriggers = mobileMenu.querySelectorAll('[data-close-menu]');
+    closeTriggers.forEach(function (link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        closeMenu();
+        hamburger.focus();
       }
     });
-  });
 
-});
+    // Close on outside click (clicking the backdrop)
+    mobileMenu.addEventListener('click', function (e) {
+      if (e.target === mobileMenu) {
+        closeMenu();
+      }
+    });
+  }
+
+  /* ── 4. Smooth scroll for anchor links ────────────────────── */
+  function initSmoothScroll() {
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+
+      var targetId = link.getAttribute('href');
+      if (targetId === '#' || targetId.length < 2) return;
+
+      var target = document.querySelector(targetId);
+      if (!target) return;
+
+      e.preventDefault();
+      var navHeight = parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue('--navbar-height'),
+        10
+      ) || 72;
+
+      var top = target.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    });
+  }
+
+  /* ── 5. Initialize on DOM ready ───────────────────────────── */
+  function init() {
+    initNavbar();
+    initMobileMenu();
+    initSmoothScroll();
+    initAOS();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
