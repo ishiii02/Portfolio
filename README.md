@@ -25,6 +25,7 @@ This project was architected and scaffolded with the assistance of **Claude Sonn
 **Other Tools Used:**
 - **GitHub Copilot** — Code completion during development
 - **Tailwind CSS IntelliSense** — Class suggestions in VS Code
+- **Supabase** — Optional cloud persistence for contact submissions and future project/image storage
 
 > AI was used as an architectural and implementation assistant. All content, design decisions, and final code are owned by Nash Francis.
 
@@ -72,11 +73,13 @@ Request → Router → Controller → Model → View → Response
 | express-rate-limit | Spam + DDoS protection |
 | Morgan | HTTP request logging |
 | dotenv | Environment variable management |
+| Supabase | Optional contact persistence + future storage/DB |
 
 ### Data
 | Stage | Technology | Reason |
 |-------|------------|--------|
 | Launch | JSON flat files (`/data/`) | Zero setup, easy to edit |
+| Current | Supabase | Optional persistence for contact submissions and future project data |
 | Future | PostgreSQL / Firebase | When blog or CMS is added |
 
 ### Deployment
@@ -102,7 +105,8 @@ nash-portfolio/
 │
 ├── config/
 │   ├── app.config.js         # Port, env, owner info
-│   └── mailer.config.js      # SMTP configuration
+│   ├── mailer.config.js      # SMTP configuration
+│   └── supabase.config.js    # Supabase client configuration
 │
 ├── routes/
 │   ├── index.js              # Aggregates all routes
@@ -133,6 +137,7 @@ nash-portfolio/
 │
 ├── services/
 │   ├── mail.service.js       # Email sending logic
+│   ├── supabase.service.js   # Supabase persistence wrapper
 │   └── validation.service.js # Form validation rules
 │
 ├── middleware/
@@ -197,7 +202,9 @@ npm install
 
 # 3. Configure environment
 cp .env.example .env
-# Edit .env with your SMTP credentials
+# Edit .env with your SMTP credentials and optional Supabase values
+# Required for email: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
+# Optional for persistence: SUPABASE_URL, SUPABASE_KEY
 
 # 4. Run development server
 npm run dev
@@ -306,6 +313,7 @@ vercel
 # - OWNER_NAME
 # - OWNER_EMAIL
 # - SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
+# - SUPABASE_URL, SUPABASE_KEY (optional)
 # - NODE_ENV=production
 ```
 
