@@ -1,5 +1,6 @@
 'use strict';
 
+
 const { validationResult } = require('express-validator');
 const { sendContactEmail } = require('../services/mail.service');
 
@@ -31,7 +32,10 @@ exports.postContactForm = async (req, res) => {
     const { name, email, message } = req.body;
 
     // Send email
-    await sendContactEmail({ name, email, message });
+    const emailSent = await sendContactEmail({ name, email, message });
+    if (!emailSent) {
+      throw new Error('Contact email delivery failed.');
+    }
 
     // Redirect with success status
     res.redirect('/contact?status=sent');

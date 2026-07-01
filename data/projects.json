@@ -1,13 +1,13 @@
 [
   {
     "id": "project-one",
-    "title": "Project One",
-    "summary": "Short description of this project.",
+    "title": "thefolio",
+    "summary": "A protfolio website I made during my 3rd year in the course of Web Development.",
     "description": "Full case study description goes here.",
-    "tags": ["Node.js", "Express", "PostgreSQL"],
+    "tags": ["React", "Express", "MongoDb"],
     "image": "/images/projects/project-one.png",
-    "liveUrl": "https://example.com",
-    "githubUrl": "https://github.com/Nash-Francis/project-one",
+    "liveUrl": "https://thefolio-lime.vercel.app",
+    "githubUrl": "https://github.com/Nashii02/thefolio",
     "featured": true
   }
 ]

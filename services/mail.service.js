@@ -58,12 +58,11 @@ async function sendContactEmail({ name, email, message }) {
     console.log(`[MAIL] Contact form email sent from ${email} to ${appConfig.owner.email}`);
     return true;
   } catch (err) {
-    console.error('[MAIL ERROR]', err.message);
-    // In development, log but don't throw
-    if (process.env.NODE_ENV === 'production') {
-      throw err;
+    console.error('[MAIL ERROR]', err);
+    if (err && err.stack) {
+      console.error(err.stack);
     }
-    return false;
+    throw err;
   }
 }
 
