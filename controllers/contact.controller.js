@@ -3,6 +3,7 @@
 
 const { validationResult } = require('express-validator');
 const { sendContactEmail } = require('../services/mail.service');
+const { saveContactSubmission, isSupabaseReady } = require('../services/supabase.service');
 
 exports.getContactPage = (req, res) => {
   const status = req.query.status || null;
@@ -30,6 +31,15 @@ exports.postContactForm = async (req, res) => {
 
     // Extract validated and sanitized form data
     const { name, email, message } = req.body;
+
+    // Persist submission to Supabase when available.
+    if (isSupabaseReady()) {
+      try {
+        await saveContactSubmission({ name, email, message });
+      } catch (dbError) {
+        console.warn('[SUPABASE] Failed to save contact submission:', dbError.message || dbError);
+      }
+    }
 
     // Send email
     const emailSent = await sendContactEmail({ name, email, message });

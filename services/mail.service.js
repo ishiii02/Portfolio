@@ -39,23 +39,6 @@ async function sendContactEmail({ name, email, message }) {
       `,
     };
 
-    // Email to sender (confirmation)
-    const senderMailOptions = {
-      from: process.env.SMTP_USER || 'noreply@nashfrancis.dev',
-      to: email,
-      subject: `Confirmation: Message Received`,
-      html: `
-        <h2>Thank you for reaching out!</h2>
-        <p>Hi ${escapeHtml(name)},</p>
-        <p>I've received your message and will get back to you as soon as possible.</p>
-        <hr>
-        <p><strong>Your Message:</strong></p>
-        <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
-        <hr>
-        <p>Best regards,<br>${appConfig.owner.name}</p>
-      `,
-    };
-
     const transporter = createTransporter();
     if (!transporter) {
       const missingVars = mailerConfig.getMissingMailerVars();
@@ -74,9 +57,8 @@ async function sendContactEmail({ name, email, message }) {
       throw verificationError;
     }
 
-    // Send both emails
+    // Send only the owner notification email.
     await transporter.sendMail(ownerMailOptions);
-    await transporter.sendMail(senderMailOptions);
 
     console.log(`[MAIL] Contact form email sent from ${email} to ${appConfig.owner.email}`);
     return true;
