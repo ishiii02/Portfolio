@@ -1,32 +1,28 @@
 'use strict';
 
-function getMailerConfig() {
-  const host = process.env.SMTP_HOST;
-  const port = process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT, 10) : undefined;
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
+const requiredEnv = {
+  SMTP_HOST: process.env.SMTP_HOST,
+  SMTP_PORT: process.env.SMTP_PORT,
+  SMTP_USER: process.env.SMTP_USER,
+  SMTP_PASS: process.env.SMTP_PASS,
+};
 
-  if (!host || !port || !user || !pass) {
-    return null;
-  }
+const missingVars = Object.entries(requiredEnv)
+  .filter(([, value]) => value === undefined || value === null || value === '')
+  .map(([key]) => key);
 
-  return {
-    host,
-    port,
-    auth: { user, pass },
-  };
-}
-
-function getMissingMailerVars() {
-  return [
-    'SMTP_HOST',
-    'SMTP_PORT',
-    'SMTP_USER',
-    'SMTP_PASS',
-  ].filter(key => !process.env[key]);
+if (missingVars.length > 0) {
+  throw new Error(
+    `Missing required SMTP environment variable(s): ${missingVars.join(', ')}. ` +
+    'Please set these in your environment or Vercel dashboard before starting the app.'
+  );
 }
 
 module.exports = {
-  getMailerConfig,
-  getMissingMailerVars,
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT, 10),
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
 };
