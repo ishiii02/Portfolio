@@ -4,8 +4,13 @@ const nodemailer = require('nodemailer');
 const mailerConfig = require('../config/mailer.config');
 const appConfig = require('../config/app.config');
 
-// Initialize Nodemailer transporter
-const transporter = nodemailer.createTransport(mailerConfig);
+function createTransporter() {
+  const config = mailerConfig.getMailerConfig();
+  if (!config) {
+    return null;
+  }
+  return nodemailer.createTransport(config);
+}
 
 /**
  * Send a contact form email
@@ -50,6 +55,16 @@ async function sendContactEmail({ name, email, message }) {
         <p>Best regards,<br>${appConfig.owner.name}</p>
       `,
     };
+
+    const transporter = createTransporter();
+    if (!transporter) {
+      const missingVars = mailerConfig.getMissingMailerVars();
+      const err = new Error(
+        `Email service is not configured. Missing SMTP environment variable(s): ${missingVars.join(', ')}.`
+      );
+      err.code = 'EMAIL_CONFIG_MISSING';
+      throw err;
+    }
 
     // Send both emails
     await transporter.sendMail(ownerMailOptions);

@@ -6,11 +6,11 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
+    "build": "echo \"No build step required\"",
     "lint": "eslint .",
     "audit": "npm audit",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-    
   },
   "keywords": [
     "portfolio",
