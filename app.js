@@ -11,7 +11,8 @@ const { handle404, handle500 }    = require('./middleware/error.middleware');
 const routes                      = require('./routes/index');
 
 const app = express();
-
+// ─── Trust proxy for Vercel / reverse proxies ─────────────────────────
+app.set('trust proxy', 1);
 // ─── View Engine ────────────────────────────────────────────────
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
