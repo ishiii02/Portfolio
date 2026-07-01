@@ -9,6 +9,7 @@ function createTransporter() {
   if (!config) {
     return null;
   }
+
   return nodemailer.createTransport(config);
 }
 
@@ -22,12 +23,11 @@ function createTransporter() {
  */
 async function sendContactEmail({ name, email, message }) {
   try {
-    // Email to owner (notification of contact form submission)
     const ownerMailOptions = {
       from: process.env.SMTP_USER || 'noreply@nashfrancis.dev',
       to: appConfig.owner.email,
       replyTo: email,
-      subject: `New Contact Form Submission from ${name}`,
+      subject: `New Contact Form Submission from ${escapeHtml(name)}`,
       html: `
         <h2>New Message from Your Portfolio</h2>
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
@@ -66,6 +66,14 @@ async function sendContactEmail({ name, email, message }) {
       throw err;
     }
 
+    // Verify SMTP connection before sending messages so failures are caught early.
+    try {
+      await transporter.verify();
+    } catch (verificationError) {
+      verificationError.code = verificationError.code || 'EMAIL_TRANSPORT_ERROR';
+      throw verificationError;
+    }
+
     // Send both emails
     await transporter.sendMail(ownerMailOptions);
     await transporter.sendMail(senderMailOptions);
@@ -76,6 +84,9 @@ async function sendContactEmail({ name, email, message }) {
     console.error('[MAIL ERROR]', err);
     if (err && err.stack) {
       console.error(err.stack);
+    }
+    if (!err.code) {
+      err.code = 'EMAIL_TRANSPORT_ERROR';
     }
     throw err;
   }
