@@ -31,10 +31,11 @@
       aria-label="Professional and educational experience"
     >
       <div class="container">
+        <div class="experience-grid">
 
-        <% if (experience && experience.length > 0) { %>
+          <% if (experience && experience.length > 0) { %>
 
-          <% experience.forEach((exp, i) => { %>
+            <% experience.forEach((exp, i) => { %>
             <article
               class="card"
               aria-label="<%= exp.role %> at <%= exp.company %>"
@@ -71,6 +72,7 @@
 
         <% } %>
 
+        </div>
       </div>
     </section>
 

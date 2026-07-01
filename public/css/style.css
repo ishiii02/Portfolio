@@ -182,6 +182,32 @@ input, textarea, select {
   padding-block: clamp(var(--space-10), 6vw, var(--space-20));
 }
 
+.hero__actions,
+.about-bio__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.hero__actions .btn,
+.about-bio__actions .btn {
+  min-width: 10rem;
+}
+
+.about-bio__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+  gap: var(--space-10);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .about-bio__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
@@ -367,6 +393,11 @@ button + .btn {
 .btn--lg  { padding: var(--space-4) var(--space-8); font-size: var(--text-base); }
 
 /* ── 7. CARDS ───────────────────────────────────────────────── */
+.experience-grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
 .card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
