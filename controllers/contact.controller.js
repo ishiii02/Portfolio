@@ -41,11 +41,20 @@ exports.postContactForm = async (req, res) => {
     res.redirect('/contact?status=sent');
   } catch (err) {
     console.error('[CONTACT ERROR]', err);
-    res.render('pages/contact', {
+
+    const errorMessage = err.code === 'EMAIL_CONFIG_MISSING'
+      ? 'Email service is not configured. Please set the SMTP variables and try again.'
+      : 'Something went wrong. Please try again later.';
+
+    if (req.xhr || (req.headers.accept && req.headers.accept.includes('application/json'))) {
+      return res.status(503).json({ error: errorMessage });
+    }
+
+    res.status(err.code === 'EMAIL_CONFIG_MISSING' ? 503 : 500).render('pages/contact', {
       title: 'Contact — Nash Francis',
       currentPage: 'contact',
       status: null,
-      errors: ['Something went wrong. Please try again later.'],
+      errors: [errorMessage],
     });
   }
 };
